@@ -1,0 +1,48 @@
+# This workflow will install node dependencies, build the source code, and deploy the static files to GitHub Pages.
+# Be sure the following options is matching with your project configuration
+# - master branch is the default branch
+# - the static files are generated in the dist/ directory
+# - the nodejs version working with your project
+
+name: Deploy CI
+permissions:
+  id-token: write
+  pages: write
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+      - name: Build static files
+        id: build
+        run: |
+          npm install
+          npm run build
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
