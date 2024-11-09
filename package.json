@@ -50,14 +50,11 @@
     "esno": "^4.0.0",
     "ora": "^6.2.0",
     "package-json": "^10.0.1",
-    "simple-git-hooks": "^2.11.1",
     "ts-loader": "^9.4.1",
     "ts-node": "^10.9.1",
     "tsup": "^6.5.0",
     "typescript": "^5.2.2",
     "vitest": "^0.34.6",
     "zx": "^7.2.3"
-  },
-  "simple-git-hooks": {
   }
 }
