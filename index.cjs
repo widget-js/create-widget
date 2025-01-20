@@ -7866,6 +7866,7 @@ async function init() {
   const vueuse = argv2.vueuse;
   const iconpark = argv2.iconpark;
   const githubPage = argv2.githubPage;
+  const eslintConfig = argv2.eslintConfig;
   const cwd2 = process2.cwd();
   let result = {};
   result = await (0, import_prompts.default)(
@@ -7912,6 +7913,13 @@ async function init() {
         message: () => {
           return `Use GitHub Page to deploy your project?`;
         }
+      },
+      {
+        name: "useEslintConfig",
+        type: () => eslintConfig ? null : "confirm",
+        message: () => {
+          return `Use @antfu/eslint-config (Anthony's ESLint config preset)?`;
+        }
       }
     ],
     {
@@ -7926,7 +7934,8 @@ async function init() {
     useVueUse = argv2.vueuse,
     useUnoCss = argv2.unocss,
     useIconPark = argv2.iconpark,
-    useGithubPage = argv2.githubPage
+    useGithubPage = argv2.githubPage,
+    useEslintConfig = argv2.eslintConfig
   } = result;
   const root = import_node_path.default.join(cwd2, targetDir);
   if (import_node_fs.default.existsSync(root) && shouldOverwrite) {
@@ -7950,6 +7959,17 @@ Scaffolding project in ${root}...`);
   }
   if (useIconPark) {
     packageJson.dependencies["@icon-park/vue-next"] = "latest";
+  }
+  if (useEslintConfig) {
+    packageJson.devDependencies["@antfu/eslint-config"] = "latest";
+    packageJson.devDependencies.eslint = "latest";
+    packageJson.scripts = {
+      ...packageJson.scripts,
+      "lint": "eslint .",
+      "lint:fix": "eslint . --fix"
+    };
+    const eslintTemplateRoot = import_node_path.default.join(__dirname, "./eslint");
+    await FileUtils.copyFolderRecursive(eslintTemplateRoot, root);
   }
   import_node_fs.default.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
   if (useGithubPage) {

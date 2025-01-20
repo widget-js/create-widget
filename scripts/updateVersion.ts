@@ -1,6 +1,6 @@
 import fs from 'node:fs'
-import packageJson from 'package-json'
 import ora from 'ora'
+import packageJson from 'package-json'
 
 const spinner = ora('Loading unicorns').start()
 async function run() {

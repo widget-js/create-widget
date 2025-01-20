@@ -68,6 +68,7 @@ async function init() {
   const vueuse = argv.vueuse
   const iconpark = argv.iconpark
   const githubPage = argv.githubPage
+  const eslintConfig = argv.eslintConfig
 
   const cwd = process.cwd()
   let result: {
@@ -77,6 +78,7 @@ async function init() {
     useUnoCss?: boolean
     useIconPark?: boolean
     useGithubPage?: boolean
+    useEslintConfig?: boolean
   } = {}
   result = await prompts(
     [
@@ -128,6 +130,13 @@ async function init() {
           return `Use GitHub Page to deploy your project?`
         },
       },
+      {
+        name: 'useEslintConfig',
+        type: () => (eslintConfig ? null : 'confirm'),
+        message: () => {
+          return `Use @antfu/eslint-config (Anthony's ESLint config preset)?`
+        },
+      },
     ],
     {
       onCancel: () => {
@@ -145,6 +154,7 @@ async function init() {
     useUnoCss = argv.unocss,
     useIconPark = argv.iconpark,
     useGithubPage = argv.githubPage,
+    useEslintConfig = argv.eslintConfig,
   } = result
 
   const root = path.join(cwd, targetDir)
@@ -174,6 +184,17 @@ async function init() {
   }
   if (useIconPark) {
     packageJson.dependencies['@icon-park/vue-next'] = 'latest'
+  }
+  if (useEslintConfig) {
+    packageJson.devDependencies['@antfu/eslint-config'] = 'latest'
+    packageJson.devDependencies.eslint = 'latest'
+    packageJson.scripts = {
+      ...packageJson.scripts,
+      'lint': 'eslint .',
+      'lint:fix': 'eslint . --fix',
+    }
+    const eslintTemplateRoot = path.join(__dirname, './eslint')
+    await FileUtils.copyFolderRecursive(eslintTemplateRoot, root)
   }
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2))
   if (useGithubPage) {

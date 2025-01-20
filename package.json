@@ -1,6 +1,6 @@
 {
   "name": "create-widget",
-  "version": "24.1.1-beta.43",
+  "version": "24.1.1-beta.45",
   "private": false,
   "description": "An easy way to start a Widget project",
   "author": "Neo Fu <rtugeek@gmail.com>",
@@ -12,7 +12,9 @@
   "files": [
     "index.cjs",
     "template",
-    "unocss"
+    "unocss",
+    "github-page",
+    "eslint"
   ],
   "engines": {
     "node": ">=v16.20.0"
@@ -24,6 +26,7 @@
     "test": "node index.cjs",
     "update:version": "esno scripts/updateVersion.ts",
     "pnpm:publish": "npm run build && pnpm publish --no-git-checks",
+    "link": "pnpm link --global",
     "lint:fix": "eslint"
   },
   "publishConfig": {
