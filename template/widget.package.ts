@@ -8,6 +8,11 @@ export default new WidgetPackage({
   },
   entry: '/',
   hash: true,
+  remote: {
+    base: '/',
+    hostname: '修改成你的域名',
+    hash: true,
+  },
   homepage: '',
   name: 'cn.example.widget',
   title: {
