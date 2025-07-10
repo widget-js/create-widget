@@ -7,16 +7,22 @@ import vue from '@vitejs/plugin-vue'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    vue(),
-    widget(),
-    AutoImport({ resolvers: [ElementPlusResolver()] }),
-    Components({ resolvers: [ElementPlusResolver()] }),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+export default defineConfig((config)=>{
+  const mode = config.mode
+  // TODO change your base path according to your deploy mode
+  const base = mode == 'offline' ? './':'/'
+  return {
+    base: base,
+    plugins: [
+      vue(),
+      widget(),
+      AutoImport({ resolvers: [ElementPlusResolver()] }),
+      Components({ resolvers: [ElementPlusResolver()] }),
+    ],
+    resolve: {
+      alias: {
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+      },
     },
-  },
+  }
 })
