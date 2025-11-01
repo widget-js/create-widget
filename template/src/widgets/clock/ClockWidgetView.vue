@@ -1,10 +1,10 @@
 <script lang="ts" setup>
+import { useStorage } from '@vueuse/core'
 import { useWidget } from '@widget-js/vue3'
 import { ref } from 'vue'
-import { ClockModel } from '@/widgets/clock/model/ClockModel'
 
-const { widgetData } = useWidget(ClockModel)
-
+useWidget({})
+const title = useStorage('title', 'Clock')
 const time = ref(new Date().toLocaleTimeString())
 setInterval(() => {
   time.value = new Date().toLocaleTimeString()
@@ -14,21 +14,24 @@ setInterval(() => {
 <template>
   <widget-wrapper>
     <div class="clock">
-      <span>{{ widgetData.title }}</span>
+      <span>{{ title }}</span>
       <span>{{ time }}</span>
     </div>
   </widget-wrapper>
 </template>
 
 <style scoped>
+*{
+  user-select: none;
+}
 .clock {
   font-size: 16px;
   font-weight: bold;
   display: flex;
+  height: 100%;
+  gap: 0.5rem;
   flex-direction: column;
   align-items: center;
-  background-color: var(--widget-background-color);
-  border-radius: var(--widget-border-radius);
   color: var(--widget-color);
   justify-content: center;
 }

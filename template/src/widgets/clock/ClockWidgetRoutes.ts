@@ -4,7 +4,7 @@ import ClockWidget from './Clock.widget'
 const path = ClockWidget.path
 const name = ClockWidget.name
 
-const configPagePath = ClockWidget.configPagePath!
+const configPagePath = ClockWidget.configPagePath!.split('?')[0]!
 
 const ClockWidgetRoutes: RouteRecordRaw[] = [
   {
@@ -12,16 +12,16 @@ const ClockWidgetRoutes: RouteRecordRaw[] = [
     name: `${name}`,
     component: () =>
       import(
-        /* webpackChunkName: "cn.test.widget.clock" */ './ClockWidgetView.vue'
-      ),
+        /* webpackChunkName: "cn.test.widget.clock" */ './ClockWidgetView.vue',
+        ),
   },
   {
     path: configPagePath,
     name: `${name}.config`,
     component: () =>
       import(
-        /* webpackChunkName: "cn.test.widget.clock.config" */ './ClockConfigView.vue'
-      ),
+        /* webpackChunkName: "cn.test.widget.clock.config" */ './ClockConfigView.vue',
+        ),
   },
 ]
 
