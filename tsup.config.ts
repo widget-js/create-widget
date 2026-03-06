@@ -1,6 +1,8 @@
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  outDir: 'lib',
-  format: 'js',
+  clean: true,
+  outDir: 'bin',
+  format: ['esm'],
+  shims: true,
 })

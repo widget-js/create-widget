@@ -28,7 +28,7 @@ export default antfu({
     }],
   },
 }, {
-  files: ['scripts/*.ts', 'src/index.ts'],
+  files: ['scripts/*.ts', 'src/index.ts', '**/*.test.ts', '**/*.spec.ts'],
   rules: {
     'no-alert': 'off',
     'no-console': 'off',

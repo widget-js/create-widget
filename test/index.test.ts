@@ -1,7 +1,7 @@
 import path from 'node:path'
-import { expect, it } from 'vitest'
-import { minimatch } from 'minimatch'
 import gradient from 'gradient-string'
+import { minimatch } from 'minimatch'
+import { expect, it } from 'vitest'
 
 it('minimatch', () => {
   const fileName = path.basename(

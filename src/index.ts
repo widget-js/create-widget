@@ -168,7 +168,7 @@ async function init() {
 
   console.log(`\nScaffolding project in ${root}...`)
 
-  const templateRoot = path.join(__dirname, './template')
+  const templateRoot = path.join(__dirname, '../template')
 
   // Copy all template files to the target directory
   await FileUtils.copyFolderRecursive(templateRoot, root)
@@ -179,7 +179,7 @@ async function init() {
   }
   if (useUnoCss) {
     packageJson.devDependencies.unocss = 'latest'
-    const unocssTemplateRoot = path.join(__dirname, './unocss')
+    const unocssTemplateRoot = path.join(__dirname, '../unocss')
     await FileUtils.copyFolderRecursive(unocssTemplateRoot, root)
   }
   if (useIconPark) {
@@ -193,12 +193,12 @@ async function init() {
       'lint': 'eslint .',
       'lint:fix': 'eslint . --fix',
     }
-    const eslintTemplateRoot = path.join(__dirname, './eslint')
+    const eslintTemplateRoot = path.join(__dirname, '../eslint')
     await FileUtils.copyFolderRecursive(eslintTemplateRoot, root)
   }
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2))
   if (useGithubPage) {
-    const githubPageTemplateRoot = path.join(__dirname, './github-page')
+    const githubPageTemplateRoot = path.join(__dirname, '../github-page')
     await FileUtils.copyFolderRecursive(githubPageTemplateRoot, root)
   }
   // const callbacks = []

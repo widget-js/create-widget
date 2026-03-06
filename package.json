@@ -1,16 +1,17 @@
 {
   "name": "create-widget",
-  "version": "24.1.1-beta.50",
+  "version": "24.1.1-beta.53",
   "private": false,
   "description": "An easy way to start a Widget project",
   "author": "Neo Fu <rtugeek@gmail.com>",
   "license": "MIT",
   "main": "lib/index.js",
+  "type": "module",
   "bin": {
-    "create-widget": "index.cjs"
+    "create-widget": "bin/index.js"
   },
   "files": [
-    "index.cjs",
+    "bin/index.js",
     "template",
     "unocss",
     "github-page",
@@ -20,7 +21,7 @@
     "node": ">=v16.20.0"
   },
   "scripts": {
-    "build": "zx ./scripts/build.mjs",
+    "build": "tsup-node build src/index.ts",
     "watch": "tsup-node src/index.ts --format cjs --watch",
     "build:run": "npm run build && npm exec create-widget",
     "test": "node index.cjs",
@@ -42,22 +43,19 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.8.0",
     "@tsconfig/node18": "^18.2.2",
+    "@tsconfig/node22": "^22.0.5",
     "@types/ejs": "latest",
     "@types/fs-extra": "^11.0.4",
     "@types/gradient-string": "^1.1.2",
     "@types/minimist": "^1.2.5",
     "@types/node": "^18.11.13",
     "@types/prompts": "^2.4.9",
-    "esbuild": "^0.20.2",
     "eslint": "8.48.0",
     "esno": "^4.0.0",
     "ora": "^6.2.0",
     "package-json": "^10.0.1",
-    "ts-loader": "^9.4.1",
-    "ts-node": "^10.9.1",
-    "tsup": "^6.5.0",
+    "tsup": "^8.3.5",
     "typescript": "^5.2.2",
-    "vitest": "^0.34.6",
-    "zx": "^7.2.3"
+    "vitest": "^0.34.6"
   }
 }
